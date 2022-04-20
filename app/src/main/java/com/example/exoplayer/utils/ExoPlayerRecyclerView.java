@@ -308,7 +308,7 @@ public class ExoPlayerRecyclerView extends RecyclerView {
       MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory)
           .createMediaSource(MediaItem.fromUri(Uri.parse(mediaUrl)));
       videoPlayer.addMediaSource(videoSource);
-      videoPlayer.prepare();
+      videoPlayer.prepare(videoSource);
       videoPlayer.setPlayWhenReady(true);
     }
   }
