@@ -34,11 +34,10 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
-import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-
+import com.google.android.exoplayer2.ui.StyledPlayerView;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -54,7 +53,7 @@ public class ExoPlayerRecyclerView extends RecyclerView {
   private ProgressBar progressBar;
   private View viewHolderParent;
   private FrameLayout mediaContainer;
-  private PlayerView videoSurfaceView;
+  private StyledPlayerView videoSurfaceView;
   private ExoPlayer videoPlayer;
   /**
    * variable declaration
@@ -96,7 +95,7 @@ public class ExoPlayerRecyclerView extends RecyclerView {
     videoSurfaceDefaultHeight = point.x;
     screenDefaultHeight = point.y;
 
-    videoSurfaceView = new PlayerView(this.context);
+    videoSurfaceView = new StyledPlayerView(this.context);
     videoSurfaceView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_ZOOM);
 
 //    BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
@@ -158,18 +157,7 @@ public class ExoPlayerRecyclerView extends RecyclerView {
     videoPlayer.addListener(new Player.Listener() {
 
       @Override
-      public void onTracksChanged(TrackGroupArray trackGroups,
-                                  TrackSelectionArray trackSelections) {
-
-      }
-
-      @Override
-      public void onLoadingChanged(boolean isLoading) {
-
-      }
-
-      @Override
-      public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+      public void onPlaybackStateChanged(int playbackState) {
         switch (playbackState) {
 
           case Player.STATE_BUFFERING:
@@ -211,20 +199,19 @@ public class ExoPlayerRecyclerView extends RecyclerView {
       }
 
 
-
-      @Override
-      public void onPositionDiscontinuity(int reason) {
-
-      }
-
       @Override
       public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
 
       }
 
       @Override
-      public void onSeekProcessed() {
+      public void onSeekBackIncrementChanged(long seekBackIncrementMs) {
+        Player.Listener.super.onSeekBackIncrementChanged(seekBackIncrementMs);
+      }
 
+      @Override
+      public void onSeekForwardIncrementChanged(long seekForwardIncrementMs) {
+        Player.Listener.super.onSeekForwardIncrementChanged(seekForwardIncrementMs);
       }
     });
   }
@@ -338,7 +325,7 @@ public class ExoPlayerRecyclerView extends RecyclerView {
   }
 
   // Remove the old player
-  private void removeVideoView(PlayerView videoView) {
+  private void removeVideoView(StyledPlayerView videoView) {
     ViewGroup parent = (ViewGroup) videoView.getParent();
     if (parent == null) {
       return;
