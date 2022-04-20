@@ -6,7 +6,7 @@
     tools:context=".MainActivity"
     >
 
-  <com.example.exoplayer.utils.ExoPlayerRecyclerView
+  <com.example.exoplayer.utils.ExoPlayerRecyclerView_kt
       android:id="@+id/exoPlayerRecyclerView"
       android:layout_width="match_parent"
       android:layout_height="match_parent"

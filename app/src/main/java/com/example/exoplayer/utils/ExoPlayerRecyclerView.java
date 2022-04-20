@@ -369,7 +369,7 @@ public class ExoPlayerRecyclerView extends RecyclerView {
 
   public void onPausePlayer() {
     if (videoPlayer != null) {
-      videoPlayer.stop(true);
+      videoPlayer.stop();
     }
   }
 

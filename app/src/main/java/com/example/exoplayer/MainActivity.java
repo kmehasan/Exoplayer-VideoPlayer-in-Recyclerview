@@ -9,16 +9,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.exoplayer.adapter.MediaRecyclerAdapter;
+import com.example.exoplayer.utils.ExoPlayerRecyclerView_kt;
 import com.example.exoplayer.model.MediaObject;
-import com.example.exoplayer.utils.ExoPlayerRecyclerView;
 
 import java.util.ArrayList;
 
-import static android.widget.LinearLayout.VERTICAL;
-
 public class MainActivity extends AppCompatActivity {
 
-    ExoPlayerRecyclerView mRecyclerView;
+    ExoPlayerRecyclerView_kt mRecyclerView;
 
     private ArrayList<MediaObject> mediaObjectList = new ArrayList<>();
     private MediaRecyclerAdapter mAdapter;
